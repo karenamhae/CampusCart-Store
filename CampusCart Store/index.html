@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusCart</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- LOGIN SECTION -->
+  <section id="login-section" class="auth-container">
+    <div class="login-card">
+      <h2>CampusCart Login</h2>
+      <p class="subtitle">Please log in using your account credentials</p>
+      
+      <form id="login-form">
+        <div class="form-group">
+          <label for="email">Email or Username</label>
+          <input type="text" id="email" placeholder="e.g. user@gmail.com" required autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter password" required>
+        </div>
+        
+        <div id="login-error" class="error-msg"></div>
+
+        <button type="submit" id="login-btn" class="btn btn-primary btn-block">Login</button>
+      </form>
+
+      <div class="demo-credentials">
+        <p><strong>Demo Credentials:</strong></p>
+        <p><strong>Customer:</strong> user@gmail.com | user123</p>
+        <p><strong>Seller:</strong> seller@gmail.com | seller123</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN APP CONTAINER -->
+  <div id="app-container" class="hidden">
+    <!-- NAVIGATION BAR -->
+    <header class="navbar">
+      <div class="nav-brand">🌱 CampusCart Market</div>
+      
+      <nav id="customer-nav" class="nav-links">
+        <a href="#" class="nav-item active" data-page="home">Home</a>
+        <a href="#" class="nav-item" data-page="products">Products</a>
+        <a href="#" class="nav-item" data-page="categories">Categories</a>
+        <a href="#" class="nav-item" data-page="cart">Cart (<span id="cart-count">0</span>)</a>
+        <a href="#" class="nav-item" data-page="wishlist">Wishlist (<span id="wishlist-count">0</span>)</a>
+        <a href="#" class="nav-item" data-page="orders">My Orders</a>
+        <a href="#" class="nav-item" data-page="profile">Profile</a>
+        <button class="btn btn-logout logout-btn">Logout</button>
+      </nav>
+
+      <nav id="seller-nav" class="nav-links hidden">
+        <a href="#" class="nav-item active" data-page="seller-dashboard">Dashboard</a>
+        <a href="#" class="nav-item" data-page="manage-products">Manage Products</a>
+        <a href="#" class="nav-item" data-page="add-product">Add Product</a>
+        <a href="#" class="nav-item" data-page="seller-orders">Orders</a>
+        <a href="#" class="nav-item" data-page="seller-profile">Seller Profile</a>
+        <button class="btn btn-logout logout-btn">Logout</button>
+      </nav>
+    </header>
+
+    <main class="main-content">
+      <!-- CUSTOMER PAGES -->
+      <section id="page-home" class="page-section">
+        <div class="banner">
+          <h1>Welcome to CampusCart!</h1>
+          <p>Your one-stop shop for school supplies, electronics, and educational tools.</p>
+        </div>
+        <h2>Featured Highlights</h2>
+        <div class="products-grid" id="featured-products"></div>
+      </section>
+
+      <section id="page-products" class="page-section hidden">
+        <h2>All Products</h2>
+        <div class="products-grid" id="all-products"></div>
+      </section>
+
+      <section id="page-categories" class="page-section hidden">
+        <h2>Product Categories</h2>
+        <div id="categories-list" class="categories-grid"></div>
+      </section>
+
+      <section id="page-cart" class="page-section hidden">
+        <h2>Your Shopping Cart</h2>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr><th>Product</th><th>Price</th><th>Quantity</th><th>Total</th><th>Action</th></tr>
+            </thead>
+            <tbody id="cart-table-body"></tbody>
+          </table>
+        </div>
+        <div class="cart-summary">
+          <h3>Total Amount: ₱<span id="cart-total-price">0.00</span></h3>
+          <button id="btn-checkout" class="btn btn-success">Checkout Order</button>
+        </div>
+      </section>
+
+      <section id="page-wishlist" class="page-section hidden">
+        <h2>Your Wishlist</h2>
+        <div class="products-grid" id="wishlist-grid"></div>
+      </section>
+
+      <section id="page-orders" class="page-section hidden">
+        <h2>My Order History</h2>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr><th>Order ID</th><th>Status</th><th>Total Amount</th></tr>
+            </thead>
+            <tbody id="customer-orders-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="page-profile" class="page-section hidden">
+        <h2>Customer Profile</h2>
+        <div class="profile-card">
+          <p><strong>Name:</strong> Rose Jane</p>
+          <p><strong>Email:</strong> user@gmail.com</p>
+          <p><strong>Role:</strong> Customer / Student</p>
+        </div>
+      </section>
+
+      <!-- SELLER PAGES -->
+      <section id="page-seller-dashboard" class="page-section hidden">
+        <h2>Seller Dashboard</h2>
+        <div class="dashboard-cards">
+          <div class="dash-card"><h3>Total Products</h3><p id="dash-total-products">0</p></div>
+          <div class="dash-card"><h3>Total Orders</h3><p id="dash-total-orders">0</p></div>
+          <div class="dash-card"><h3>Sales Summary</h3><p id="dash-total-sales">₱0.00</p></div>
+        </div>
+      </section>
+
+      <section id="page-manage-products" class="page-section hidden">
+        <h2>Manage Products</h2>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr><th>Name</th><th>Price</th><th>Category</th><th>Stock</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="seller-products-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="page-add-product" class="page-section hidden">
+        <h2><span id="form-title">Add New Product</span></h2>
+        <form id="product-form" class="form-container">
+          <input type="hidden" id="prod-id">
+          <div class="form-group"><label>Product Name</label><input type="text" id="prod-name" required></div>
+          <div class="form-group"><label>Price (₱)</label><input type="number" id="prod-price" min="1" step="0.01" required></div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="prod-category" required>
+              <option value="Electronics">Electronics</option>
+              <option value="School Supplies">School Supplies</option>
+              <option value="Accessories">Accessories</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Stock</label><input type="number" id="prod-stock" min="0" required></div>
+          <button type="submit" class="btn btn-primary">Save Product</button>
+        </form>
+      </section>
+
+      <section id="page-seller-orders" class="page-section hidden">
+        <h2>Customer Orders</h2>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr><th>Order ID</th><th>Product Ordered</th><th>Total Amount</th><th>Status</th></tr>
+            </thead>
+            <tbody id="seller-orders-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="page-seller-profile" class="page-section hidden">
+        <h2>Seller Profile</h2>
+        <div class="profile-card">
+          <p><strong>Seller Name:</strong> Karena Mhae</p>
+          <p><strong>Store Name:</strong> CampusCart Store</p>
+          <p><strong>Email:</strong> seller@gmail.com</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
